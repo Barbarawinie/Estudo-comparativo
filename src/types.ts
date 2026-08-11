@@ -58,3 +58,11 @@ export interface PdfDocument {
   fileSize: string;
   pages: number;
 }
+
+export interface CustomLogos {
+  arkos: string;
+  coopercitysp: string;
+  sulamerica: string;
+  porto: string;
+  plena: string;
+}

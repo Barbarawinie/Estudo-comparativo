@@ -114,8 +114,16 @@ export default function App() {
               </div>
             </div>
 
-            {/* Header Right: Presentation Badge */}
-            <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+            {/* Header Right: Presentation Badge & Customizer */}
+            <div className="flex items-center gap-2.5 w-full md:w-auto justify-end">
+              <button
+                onClick={() => setIsLogoModalOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#0E6135]/10 hover:bg-[#0E6135]/20 text-[#0E6135] border border-[#0E6135]/20 transition-colors cursor-pointer"
+                title="Gerenciar e enviar arquivos de logotipos oficiais"
+              >
+                <i className="fa-solid fa-images text-xs"></i>
+                <span>Personalizar Logotipos</span>
+              </button>
               <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-800 border border-slate-200">
                 <i className="fa-solid fa-building-user mr-1.5 text-xs text-[#0E6135]"></i>
                 Apresentação Comercial Executiva
@@ -768,7 +776,7 @@ export default function App() {
       {/* LOGO MANAGER MODAL */}
       {isLogoModalOpen && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full p-6 space-y-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-2xl w-full p-6 space-y-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-[#0E6135]/10 flex items-center justify-center text-[#0E6135] text-lg">
@@ -776,10 +784,10 @@ export default function App() {
                 </div>
                 <div>
                   <h3 className="font-bold text-base text-[#1A1A1A]">
-                    Gerenciador de Logotipos Originais
+                    Gerenciador de Logotipos Finais
                   </h3>
                   <p className="text-xs text-slate-500">
-                    Envie os arquivos de imagem (PNG, JPG, SVG) ou insira os links dos logos oficiais
+                    Faça o upload dos arquivos originais (PNG, JPG, SVG) ou insira o link direto
                   </p>
                 </div>
               </div>
@@ -809,7 +817,7 @@ export default function App() {
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <div className="w-32 h-12 bg-white rounded-lg border border-slate-200 p-1 flex items-center justify-center shrink-0 shadow-2xs">
+                    <div className="w-36 h-14 bg-white rounded-lg border border-slate-200 p-1.5 flex items-center justify-center shrink-0 shadow-2xs">
                       <img
                         src={logos[item.key]}
                         alt={item.label}
@@ -819,9 +827,9 @@ export default function App() {
 
                     <div className="flex-1 space-y-2">
                       <div className="flex items-center gap-2">
-                        <label className="px-3 py-1.5 bg-white border border-slate-300 hover:bg-slate-100 rounded-lg text-xs font-bold text-slate-700 cursor-pointer transition-colors shadow-2xs flex items-center gap-1.5">
+                        <label className="px-3.5 py-1.5 bg-white border border-slate-300 hover:bg-slate-100 rounded-lg text-xs font-bold text-slate-700 cursor-pointer transition-colors shadow-2xs flex items-center gap-1.5">
                           <i className="fa-solid fa-upload text-[#0E6135]"></i>
-                          Upload Imagem
+                          Upload de Arquivo Anexo
                           <input
                             type="file"
                             accept="image/*"
@@ -836,7 +844,7 @@ export default function App() {
 
                       <input
                         type="text"
-                        placeholder="Ou cole a URL da imagem (https://...)"
+                        placeholder="Ou cole o link direto da imagem (https://...)"
                         value={logos[item.key].startsWith('data:image/svg+xml') ? '' : logos[item.key]}
                         onChange={e => handleUrlChange(item.key, e.target.value)}
                         className="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#0E6135]"
@@ -853,14 +861,14 @@ export default function App() {
                 className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5"
               >
                 <i className="fa-solid fa-rotate-left"></i>
-                Restaurar Vetores Padrão
+                Restaurar Imagens Padrão
               </button>
 
               <button
                 onClick={() => setIsLogoModalOpen(false)}
                 className="px-6 py-2.5 bg-[#0E6135] hover:bg-[#073B20] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer shadow-sm"
               >
-                Concluir
+                Salvar e Aplicar
               </button>
             </div>
           </div>
