@@ -6,71 +6,10 @@ import {
   PdfDocument
 } from './types';
 
-function encodeSvg(svg: string): string {
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg.trim())}`;
-}
-
-export const ARKOS_LOGO_SVG = encodeSvg(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" width="340" height="70">
-  <defs>
-    <linearGradient id="arkosGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0E6135" />
-      <stop offset="100%" stop-color="#10B981" />
-    </linearGradient>
-  </defs>
-  <g transform="translate(10, 8)">
-    <path d="M 27 2 C 12 2 0 14 0 29 C 0 44 12 56 27 56 C 42 56 54 44 54 29 C 54 14 42 2 27 2 Z M 27 12 C 36 12 44 20 44 29 C 44 38 36 46 27 46 C 18 46 10 38 10 29 C 10 20 18 12 27 12 Z" fill="url(#arkosGrad)"/>
-    <path d="M 27 18 L 37 36 L 17 36 Z" fill="#0E6135"/>
-    <circle cx="27" cy="29" r="4.5" fill="#10B981"/>
-  </g>
-  <text x="76" y="38" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" fill="#0E6135" letter-spacing="1">ARKOS</text>
-  <text x="76" y="54" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="800" font-size="11" fill="#10B981" letter-spacing="3.5">BENEFÍCIOS</text>
-</svg>`);
-
-export const COOPERCITYSP_LOGO_SVG = encodeSvg(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" width="320" height="70">
-  <g transform="translate(8, 8)">
-    <path d="M 28 2 L 52 12 L 52 34 C 52 46 28 54 28 54 C 28 54 4 46 4 34 L 4 12 Z" fill="#0E6135"/>
-    <path d="M 28 7 L 46 15 L 46 32 C 46 41 28 48 28 48 C 28 48 10 41 10 32 L 10 15 Z" fill="#0B4F2A"/>
-    <polygon points="28,15 32,23 40,23 33,28 36,36 28,31 20,36 23,28 16,23 24,23" fill="#F59E0B"/>
-  </g>
-  <text x="70" y="36" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-size="22" fill="#0E6135" letter-spacing="0.5">COOPERCITYSP</text>
-  <text x="70" y="52" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="700" font-size="10" fill="#475569" letter-spacing="1.2">COOPERATIVA MUNICIPAL DE SP</text>
-</svg>`);
-
-export const PLENA_LOGO_SVG = encodeSvg(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 70" width="290" height="70">
-  <g transform="translate(8, 10)">
-    <path d="M 22 4 C 34 4 42 14 42 26 C 42 38 24 46 22 48 C 20 46 2 38 2 26 C 2 14 10 4 22 4 Z" fill="#00529C"/>
-    <path d="M 22 9 C 30 9 36 17 36 26 C 36 34 24 40 22 42 C 20 40 8 34 8 26 C 8 17 14 9 22 9 Z" fill="#00A8E8"/>
-    <path d="M 22 16 C 26 16 30 21 30 26 C 30 31 22 35 22 35 C 22 35 14 31 14 26 C 14 21 18 16 22 16 Z" fill="#10B981"/>
-  </g>
-  <text x="58" y="39" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-size="26" fill="#00529C">Plena</text>
-  <text x="132" y="39" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="700" font-size="26" fill="#00A8E8">Saúde</text>
-  <text x="58" y="55" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="800" font-size="10" fill="#0284C7" letter-spacing="2">BLUE 600 • ZONA NORTE</text>
-</svg>`);
-
-export const PORTO_LOGO_SVG = encodeSvg(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 70" width="280" height="70">
-  <g transform="translate(8, 11)">
-    <rect x="0" y="0" width="46" height="46" rx="12" fill="#00A3E0"/>
-    <path d="M 13 23 L 20 30 L 33 15" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  </g>
-  <text x="66" y="42" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-size="32" fill="#001E62" letter-spacing="-1">porto</text>
-  <text x="150" y="42" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="500" font-size="32" fill="#00A3E0" letter-spacing="-1">saúde</text>
-  <text x="66" y="58" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="800" font-size="10" fill="#64748B" letter-spacing="2">LINHA PRO • EMPRESARIAL</text>
-</svg>`);
-
-export const SULAMERICA_LOGO_SVG = encodeSvg(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 70" width="310" height="70">
-  <g transform="translate(8, 12)">
-    <path d="M 2 22 C 12 6, 34 6, 42 16 C 28 14, 14 22, 8 34 Z" fill="#FF6500"/>
-    <path d="M 44 22 C 34 38, 12 38, 4 28 C 18 30, 32 22, 38 10 Z" fill="#0033A0"/>
-  </g>
-  <text x="62" y="39" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" fill="#0033A0">Sul</text>
-  <text x="110" y="39" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="600" font-size="28" fill="#0033A0">América</text>
-  <text x="62" y="56" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="800" font-size="11" fill="#FF6500" letter-spacing="2.5">SAÚDE • DIRETO NACIONAL</text>
-</svg>`);
+export const ARKOS_LOGO_SVG = '/logos/arkos.png';
+export const PLENA_LOGO_SVG = '/logos/plena.png';
+export const PORTO_LOGO_SVG = '/logos/porto.svg';
+export const SULAMERICA_LOGO_SVG = '/logos/sulamerica.svg';
 
 export const HIGHLIGHT_CARDS: HighlightCard[] = [
   {

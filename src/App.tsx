@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   ARKOS_LOGO_SVG,
-  COOPERCITYSP_LOGO_SVG,
   PLENA_LOGO_SVG,
   PORTO_LOGO_SVG,
   SULAMERICA_LOGO_SVG,
@@ -18,17 +17,8 @@ import {
 } from './data';
 import { PdfDocument } from './types';
 
-interface CustomLogos {
-  arkos: string;
-  coopercitysp: string;
-  sulamerica: string;
-  porto: string;
-  plena: string;
-}
-
-const DEFAULT_LOGOS: CustomLogos = {
+const logos = {
   arkos: ARKOS_LOGO_SVG,
-  coopercitysp: COOPERCITYSP_LOGO_SVG,
   sulamerica: SULAMERICA_LOGO_SVG,
   porto: PORTO_LOGO_SVG,
   plena: PLENA_LOGO_SVG
@@ -38,54 +28,6 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<'all' | 'finance' | 'differentials' | 'network'>('all');
   const [selectedPdf, setSelectedPdf] = useState<PdfDocument | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isLogoModalOpen, setIsLogoModalOpen] = useState(false);
-
-  // Logo state loaded from localStorage or fallback to defaults
-  const [logos, setLogos] = useState<CustomLogos>(() => {
-    try {
-      const saved = localStorage.getItem('arkos_custom_logos');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        return { ...DEFAULT_LOGOS, ...parsed };
-      }
-    } catch {
-      // Fallback if parsing error
-    }
-    return DEFAULT_LOGOS;
-  });
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('arkos_custom_logos', JSON.stringify(logos));
-    } catch {
-      // Ignore quota errors
-    }
-  }, [logos]);
-
-  const handleFileUpload = (key: keyof CustomLogos, file: File) => {
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const result = e.target?.result as string;
-      if (result) {
-        setLogos(prev => ({ ...prev, [key]: result }));
-      }
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleUrlChange = (key: keyof CustomLogos, url: string) => {
-    setLogos(prev => ({ ...prev, [key]: url || DEFAULT_LOGOS[key] }));
-  };
-
-  const handleResetLogos = () => {
-    setLogos(DEFAULT_LOGOS);
-    try {
-      localStorage.removeItem('arkos_custom_logos');
-    } catch {
-      // Ignore
-    }
-  };
 
   const filteredPricing = PRICING_TABLE.filter(row =>
     row.ageGroup.toLowerCase().includes(searchTerm.toLowerCase())
@@ -103,7 +45,7 @@ export default function App() {
                 <img
                   src={logos.arkos}
                   alt="Arkos Benefícios"
-                  className="h-20 sm:h-24 md:h-28 w-auto object-contain rounded-xl shadow-xs border border-slate-100"
+                  className="h-8 sm:h-9 md:h-10 w-auto object-contain"
                 />
                 <div className="hidden sm:block">
                   <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-[#0E6135]/10 text-[#0E6135] border border-[#0E6135]/20">
@@ -114,17 +56,9 @@ export default function App() {
               </div>
             </div>
 
-            {/* Header Right: Presentation Badge & Customizer */}
+            {/* Header Right: Presentation Badge */}
             <div className="flex items-center gap-2.5 w-full md:w-auto justify-end">
-              <button
-                onClick={() => setIsLogoModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#0E6135]/10 hover:bg-[#0E6135]/20 text-[#0E6135] border border-[#0E6135]/20 transition-colors cursor-pointer"
-                title="Gerenciar e enviar arquivos de logotipos oficiais"
-              >
-                <i className="fa-solid fa-images text-xs"></i>
-                <span>Personalizar Logotipos</span>
-              </button>
-              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-800 border border-slate-200">
+              <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-800 border border-slate-200">
                 <i className="fa-solid fa-building-user mr-1.5 text-xs text-[#0E6135]"></i>
                 Apresentação Comercial Executiva
               </span>
@@ -141,8 +75,8 @@ export default function App() {
 
             <div className="flex items-center gap-2 self-center md:self-auto bg-slate-100 p-1.5 rounded-xl border border-slate-200">
               <span className="text-xs font-bold text-slate-600 px-2">Cliente:</span>
-              <span className="bg-white px-3 py-1 rounded-lg text-xs font-black text-[#0E6135] shadow-xs border border-slate-200">
-                COOPERCITYSP (Cooper City)
+              <span className="bg-white px-3 py-1 rounded-lg text-xs font-black text-[#0E6135] shadow-2xs border border-slate-200 uppercase tracking-wide">
+                COOPERCITYSP
               </span>
             </div>
           </div>
@@ -280,7 +214,7 @@ export default function App() {
                     <img
                       src={logos.porto}
                       alt="Porto Saúde"
-                      className="h-10 w-auto object-contain rounded-lg border border-slate-100 shadow-2xs"
+                      className="h-8 sm:h-9 w-auto object-contain"
                     />
                     <div>
                       <h3 className="text-base font-bold text-[#004080]">PORTO SAÚDE</h3>
@@ -308,7 +242,7 @@ export default function App() {
                     <img
                       src={logos.sulamerica}
                       alt="SulAmérica Saúde"
-                      className="h-10 w-auto object-contain rounded-lg border border-slate-100 shadow-2xs"
+                      className="h-8 sm:h-9 w-auto object-contain"
                     />
                     <div>
                       <h3 className="text-base font-bold text-[#E65100]">SULAMÉRICA SAÚDE</h3>
@@ -443,7 +377,7 @@ export default function App() {
                           <img
                             src={opLogo}
                             alt={op.logoAlt}
-                            className="h-10 w-auto object-contain bg-white px-2.5 py-1 rounded-xl shadow-xs border border-slate-100"
+                            className="h-8 sm:h-9 w-auto object-contain bg-white px-3 py-1.5 rounded-lg shadow-2xs max-w-[140px]"
                           />
                           <span className="text-xs font-extrabold tracking-widest uppercase bg-white/20 px-3 py-1 rounded-full border border-white/30">
                             {op.operator}
@@ -516,7 +450,7 @@ export default function App() {
                         <img
                           src={opLogo}
                           alt={op.logoAlt}
-                          className="h-10 w-auto object-contain rounded-lg border border-slate-100 shadow-2xs"
+                          className="h-8 sm:h-9 w-auto max-w-[130px] object-contain"
                         />
                         <span className={`px-3 py-1 rounded-full text-xs font-extrabold border ${op.badgeColor}`}>
                           {op.totalHospitals}
@@ -671,7 +605,7 @@ export default function App() {
                       <img
                         src={pdfLogo}
                         alt={pdf.logoAlt}
-                        className="h-8 w-auto object-contain rounded-lg border border-slate-100 shadow-2xs"
+                        className="h-7 sm:h-8 w-auto max-w-[120px] object-contain"
                       />
                       <i className="fa-solid fa-file-pdf text-red-600 text-2xl"></i>
                     </div>
@@ -703,13 +637,13 @@ export default function App() {
             <img
               src={logos.arkos}
               alt="Arkos Benefícios"
-              className="h-14 sm:h-16 w-auto object-contain"
+              className="h-10 sm:h-12 w-auto object-contain"
             />
             <span className="text-slate-300 font-light text-2xl">|</span>
             <img
               src={logos.coopercitysp}
               alt="COOPERCITYSP"
-              className="h-14 sm:h-16 w-auto object-contain"
+              className="h-10 sm:h-12 w-auto object-contain"
             />
           </div>
 
@@ -767,108 +701,6 @@ export default function App() {
                 className="px-6 py-2.5 bg-[#0E6135] hover:bg-[#073B20] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer shadow-xs"
               >
                 Fechar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* LOGO MANAGER MODAL */}
-      {isLogoModalOpen && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full p-6 space-y-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#0E6135]/10 flex items-center justify-center text-[#0E6135] text-lg">
-                  <i className="fa-solid fa-images"></i>
-                </div>
-                <div>
-                  <h3 className="font-bold text-base text-[#1A1A1A]">
-                    Gerenciador de Logotipos Finais
-                  </h3>
-                  <p className="text-xs text-slate-500">
-                    Faça o upload dos arquivos originais (PNG, JPG, SVG) ou insira o link direto
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsLogoModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition-colors cursor-pointer"
-              >
-                <i className="fa-solid fa-xmark"></i>
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              {[
-                { key: 'arkos' as const, label: 'Arkos Benefícios', brandColor: '#0E6135' },
-                { key: 'sulamerica' as const, label: 'SulAmérica Saúde', brandColor: '#E65100' },
-                { key: 'porto' as const, label: 'Porto Saúde / Porto Seguro', brandColor: '#004080' },
-                { key: 'plena' as const, label: 'Plena Saúde', brandColor: '#0284C7' },
-                { key: 'coopercitysp' as const, label: 'COOPERCITYSP (Cliente)', brandColor: '#1A1A1A' },
-              ].map(item => (
-                <div key={item.key} className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.brandColor }}></span>
-                      {item.label}
-                    </span>
-                    <span className="text-[11px] text-slate-500 font-medium">Pré-visualização</span>
-                  </div>
-
-                  <div className="flex items-center gap-4">
-                    <div className="w-36 h-14 bg-white rounded-lg border border-slate-200 p-1.5 flex items-center justify-center shrink-0 shadow-2xs">
-                      <img
-                        src={logos[item.key]}
-                        alt={item.label}
-                        className="max-h-full max-w-full object-contain"
-                      />
-                    </div>
-
-                    <div className="flex-1 space-y-2">
-                      <div className="flex items-center gap-2">
-                        <label className="px-3.5 py-1.5 bg-white border border-slate-300 hover:bg-slate-100 rounded-lg text-xs font-bold text-slate-700 cursor-pointer transition-colors shadow-2xs flex items-center gap-1.5">
-                          <i className="fa-solid fa-upload text-[#0E6135]"></i>
-                          Upload de Arquivo Anexo
-                          <input
-                            type="file"
-                            accept="image/*"
-                            className="hidden"
-                            onChange={e => {
-                              const file = e.target.files?.[0];
-                              if (file) handleFileUpload(item.key, file);
-                            }}
-                          />
-                        </label>
-                      </div>
-
-                      <input
-                        type="text"
-                        placeholder="Ou cole o link direto da imagem (https://...)"
-                        value={logos[item.key].startsWith('data:image/svg+xml') ? '' : logos[item.key]}
-                        onChange={e => handleUrlChange(item.key, e.target.value)}
-                        className="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#0E6135]"
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-              <button
-                onClick={handleResetLogos}
-                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5"
-              >
-                <i className="fa-solid fa-rotate-left"></i>
-                Restaurar Imagens Padrão
-              </button>
-
-              <button
-                onClick={() => setIsLogoModalOpen(false)}
-                className="px-6 py-2.5 bg-[#0E6135] hover:bg-[#073B20] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer shadow-sm"
-              >
-                Salvar e Aplicar
               </button>
             </div>
           </div>
