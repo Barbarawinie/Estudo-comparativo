@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estudo Comparativo de Planos de Saúde | COOPERCITYSP</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              arkos: '#0E6135',
+              arkosDark: '#073B20',
+              arkosLight: '#10B981',
+              charcoal: '#1A1A1A',
+              bgSlate: '#F8FAFC',
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-[#F8FAFC] text-[#1A1A1A] font-sans antialiased selection:bg-[#10B981] selection:text-white">
+    <div id="root">
+      <!-- SECTION 1: EXECUTIVE HEADER -->
+      <header class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+            <!-- Header Left: Arkos Benefícios -->
+            <div class="flex items-center gap-3">
+              <img
+                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 60' width='240' height='60'><rect width='240' height='60' rx='12' fill='%230E6135'/><path d='M22 18 L32 38 L42 18 L36 18 L32 28 L28 18 Z' fill='%2310B981'/><circle cx='32' cy='15' r='4' fill='%23FFFFFF'/><text x='54' y='32' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='20' fill='%23FFFFFF' letter-spacing='0.5'>ARKOS</text><text x='54' y='46' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='10' fill='%2310B981' letter-spacing='2'>BENEFÍCIOS</text></svg>"
+                alt="Arkos Benefícios"
+                class="h-12 w-auto object-contain rounded-xl shadow-xs"
+              />
+              <span class="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[#0E6135]/10 text-[#0E6135] border border-[#0E6135]/20">
+                <i class="fa-solid fa-award mr-1.5 text-xs"></i>
+                Consultoria Especializada em Benefícios
+              </span>
+            </div>
+
+            <!-- Header Right: COOPERCITYSP -->
+            <div class="flex items-center gap-3">
+              <span class="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-200">
+                <i class="fa-solid fa-building-user mr-1.5 text-xs text-[#0E6135]"></i>
+                Apresentação Comercial Executiva
+              </span>
+              <img
+                src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 60' width='240' height='60'><rect width='240' height='60' rx='12' fill='%231A1A1A'/><circle cx='32' cy='30' r='16' fill='%230E6135'/><path d='M26 30 L32 22 L38 30 L32 38 Z' fill='%2310B981'/><text x='56' y='32' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='17' fill='%23FFFFFF' letter-spacing='0.5'>COOPERCITYSP</text><text x='56' y='46' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='9' fill='%2310B981' letter-spacing='1.5'>COOPERATIVA</text></svg>"
+                alt="COOPERCITYSP"
+                class="h-12 w-auto object-contain rounded-xl shadow-xs"
+              />
+            </div>
+          </div>
+
+          <!-- Main Title Banner -->
+          <div class="mt-6 pt-5 border-t border-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] tracking-tight">
+                Estudo Comparativo de Planos de Saúde
+              </h1>
+              <p class="mt-1 text-base text-slate-600 font-medium">
+                Análise Comercial e Estratégica: <span class="text-[#004080] font-bold">Porto Saúde</span> vs. <span class="text-[#E65100] font-bold">SulAmérica Saúde</span>
+              </p>
+            </div>
+            <div class="bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-[#0E6135]">
+              Cliente: COOPERCITYSP (Cooper City)
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-10">
+        <!-- SECTION 2: HUMANIZED HIGHLIGHT CARDS (3 TOP HIGHLIGHTS) -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1.5 h-full bg-[#0E6135]"></div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-12 h-12 rounded-xl bg-[#0E6135]/10 flex items-center justify-center text-[#0E6135] text-xl">
+                <i class="fa-solid fa-user-shield"></i>
+              </div>
+              <h3 class="text-lg font-bold text-[#1A1A1A]">Transição Segura</h3>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Gestão e transição contínua sem prejuízo de atendimento aos colaboradores da COOPERCITYSP.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1.5 h-full bg-[#0E6135]"></div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-12 h-12 rounded-xl bg-[#0E6135]/10 flex items-center justify-center text-[#0E6135] text-xl">
+                <i class="fa-solid fa-briefcase-medical"></i>
+              </div>
+              <h3 class="text-lg font-bold text-[#1A1A1A]">Saúde Ocupacional Integrada</h3>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Opção de inclusão de SST, exames admissionais/periódicos e PCMSO/PGR direto no contrato.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-1.5 h-full bg-[#0E6135]"></div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-12 h-12 rounded-xl bg-[#0E6135]/10 flex items-center justify-center text-[#0E6135] text-xl">
+                <i class="fa-solid fa-tags"></i>
+              </div>
+              <h3 class="text-lg font-bold text-[#1A1A1A]">Condição Comercial Conquistada</h3>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Negociação de até -16% de redução comercial aplicada sobre a tabela padrão.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 3: FINANCIAL DASHBOARD & PER CAPITA PRICING TABLE -->
+        <section class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- PORTO SAÚDE -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50' width='200' height='50'><rect width='200' height='50' rx='10' fill='%23004080'/><circle cx='25' cy='25' r='11' fill='%230099FF'/><path d='M20 25 L24 29 L31 20' stroke='%23FFFFFF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='44' y='28' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='15' fill='%23FFFFFF'>Porto Saúde</text><text x='44' y='40' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='9' fill='%2399CCFF'>LINHA PRO</text></svg>" alt="Porto Saúde" class="h-9 w-auto" />
+                  <div>
+                    <h3 class="text-base font-bold text-[#004080]">PORTO SAÚDE</h3>
+                    <p class="text-xs text-slate-500">Prata Pro - Regional 10% Copar</p>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                <span class="text-xs font-semibold text-slate-500 uppercase">Total Mensal (38 Vidas)</span>
+                <div class="text-3xl font-black text-[#1A1A1A]">R$ 10.902,03</div>
+              </div>
+            </div>
+
+            <!-- SULAMÉRICA SAÚDE -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50' width='200' height='50'><rect width='200' height='50' rx='10' fill='%23E65100'/><path d='M15 17 L33 17 L24 33 Z' fill='%23FFFFFF'/><text x='42' y='28' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='14' fill='%23FFFFFF'>SulAmérica</text><text x='42' y='40' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='9' fill='%23FFE0B2'>DIRETO NACIONAL</text></svg>" alt="SulAmérica Saúde" class="h-9 w-auto" />
+                  <div>
+                    <h3 class="text-base font-bold text-[#E65100]">SULAMÉRICA SAÚDE</h3>
+                    <p class="text-xs text-slate-500">Direto Nacional - Enf 30% Copar</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full">-16% Negociado</span>
+              </div>
+              <div class="bg-orange-50/60 rounded-xl p-4 border border-orange-100">
+                <span class="text-xs font-semibold text-slate-500 uppercase">Total Mensal (38 Vidas)</span>
+                <div class="text-3xl font-black text-[#1A1A1A]">R$ 11.012,28</div>
+                <p class="text-xs text-slate-600 mt-1">De R$ 13.109,86 por R$ 11.012,28 | Economia de R$ 2.097,58/mês</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-4 bg-slate-50 border-b border-slate-200 font-bold text-sm">
+              Tabela Per Capita por Faixa Etária
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-100 text-slate-700 text-xs font-bold uppercase border-b border-slate-200">
+                    <th class="py-3.5 px-6">Faixa Etária</th>
+                    <th class="py-3.5 px-6 text-right bg-blue-50/50 text-[#004080]">Porto Saúde - Prata Pro</th>
+                    <th class="py-3.5 px-6 text-right bg-orange-50/50 text-[#E65100]">SulAmérica Saúde - Direto Nac. (-16%)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                  <tr><td class="py-3.5 px-6 font-bold">0 a 18 anos</td><td class="py-3.5 px-6 text-right font-semibold">R$ 187,25</td><td class="py-3.5 px-6 text-right font-semibold">R$ 166,16</td></tr>
+                  <tr><td class="py-3.5 px-6 font-bold">19 a 23 anos</td><td class="py-3.5 px-6 text-right font-semibold">R$ 227,08</td><td class="py-3.5 px-6 text-right font-semibold">R$ 207,70</td></tr>
+                  <tr><td class="py-3.5 px-6 font-bold">24 a 28 anos</td><td class="py-3.5 px-6 text-right font-semibold">R$ 273,93</td><td class="py-3.5 px-6 text-right font-semibold">R$ 257,54</td></tr>
+                  <tr><td class="py-3.5 px-6 font-bold">29 a 33 anos</td><td class="py-3.5 px-6 text-right font-semibold">R$ 313,60</td><td class="py-3.5 px-6 text-right font-semibold">R$ 285,87</td></tr>
+                  <tr><td class="py-3.5 px-6 font-bold">34 a 38 anos</td><td class="py-3.5 px-6 text-right font-semibold">R$ 339,79</td><td class="py-3.5 px-6 text-right font-semibold">R$ 305,89</td></tr>
+                  <tr><td class="py-3.5 px-6 font-bold">39 a 43 anos</td><td class="py-3.5 px-6 text-right font-semibold">R$ 350,92</td><td class="py-3.5 px-6 text-right font-semibold">R$ 354,82</td></tr>
+                  <tr><td class="py-3.5 px-6 font-bold">44 a 48 anos</td><td class="py-3.5 px-6 text-right font-semibold">R$ 419,18</td><td class="py-3.5 px-6 text-right font-semibold">R$ 424,16</td></tr>
+                  <tr><td class="py-3.5 px-6 font-bold">49 a 53 anos</td><td class="py-3.5 px-6 text-right font-semibold">R$ 451,26</td><td class="py-3.5 px-6 text-right font-semibold">R$ 497,11</td></tr>
+                  <tr><td class="py-3.5 px-6 font-bold">54 a 58 anos</td><td class="py-3.5 px-6 text-right font-semibold">R$ 557,57</td><td class="py-3.5 px-6 text-right font-semibold">R$ 591,81</td></tr>
+                  <tr><td class="py-3.5 px-6 font-bold">59+ anos</td><td class="py-3.5 px-6 text-right font-semibold">R$ 937,23</td><td class="py-3.5 px-6 text-right font-semibold">R$ 996,91</td></tr>
+                </tbody>
+                <tfoot>
+                  <tr class="bg-slate-900 text-white font-bold text-sm">
+                    <td class="py-4 px-6">TOTAL MENSAL DA PROPOSTA (38 VIDAS)</td>
+                    <td class="py-4 px-6 text-right text-blue-300">R$ 10.902,03</td>
+                    <td class="py-4 px-6 text-right text-orange-300">R$ 11.012,28</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4: KEY MARKET DIFFERENTIALS (PORTO VS SULAMÉRICA) -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="bg-[#004080] p-6 text-white">
+              <div class="flex items-center justify-between mb-2">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50' width='200' height='50'><rect width='200' height='50' rx='10' fill='%23004080'/><circle cx='25' cy='25' r='11' fill='%230099FF'/><path d='M20 25 L24 29 L31 20' stroke='%23FFFFFF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='44' y='28' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='15' fill='%23FFFFFF'>Porto Saúde</text><text x='44' y='40' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='9' fill='%2399CCFF'>LINHA PRO</text></svg>" alt="Porto Saúde" class="h-9 w-auto" />
+                <span class="text-xs uppercase font-bold bg-white/20 px-2.5 py-1 rounded-full">PORTO SAÚDE</span>
+              </div>
+              <h3 class="text-xl font-black">Prata Pro - Regional</h3>
+              <p class="text-xs font-semibold mt-1">Solução de Gestão Ocupacional & SST</p>
+            </div>
+            <div class="p-6 space-y-4 text-sm">
+              <div>
+                <h4 class="font-bold text-[#1A1A1A]">Saúde Ocupacional & SST Incluso</h4>
+                <p class="text-xs text-slate-600">Gestão de SST, exames admissionais/periódicos, PCMSO, PGR e eSocial inclusos no valor.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#1A1A1A]">Time Médico Porto com Isenção de Copag</h4>
+                <p class="text-xs text-slate-600">Consultas presenciais e online sem cobrança de coparticipação.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#1A1A1A]">Seguro de Vida & Odonto Incluso</h4>
+                <p class="text-xs text-slate-600">Capital R$ 30.000 Morte/Invalidez, R$ 5.000 Aux. Funeral + Porto Odonto Bronze 10 Nacional.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="bg-[#E65100] p-6 text-white">
+              <div class="flex items-center justify-between mb-2">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50' width='200' height='50'><rect width='200' height='50' rx='10' fill='%23E65100'/><path d='M15 17 L33 17 L24 33 Z' fill='%23FFFFFF'/><text x='42' y='28' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='14' fill='%23FFFFFF'>SulAmérica</text><text x='42' y='40' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='9' fill='%23FFE0B2'>DIRETO NACIONAL</text></svg>" alt="SulAmérica Saúde" class="h-9 w-auto" />
+                <span class="text-xs uppercase font-bold bg-white/20 px-2.5 py-1 rounded-full">SULAMÉRICA SAÚDE</span>
+              </div>
+              <h3 class="text-xl font-black">Direto Nacional</h3>
+              <p class="text-xs font-semibold mt-1">Livre Atendimento e Cobertura em Todo o Brasil</p>
+            </div>
+            <div class="p-6 space-y-4 text-sm">
+              <div>
+                <h4 class="font-bold text-[#1A1A1A]">Abrangência Geográfica Nacional</h4>
+                <p class="text-xs text-slate-600">Cobertura integral no Brasil, ideal para colaboradores e motoristas que viajam fora de SP.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#1A1A1A]">Reembolso Médico Modular</h4>
+                <p class="text-xs text-slate-600">Reembolso modular para consultas de emergência, ex: R$ 90,00 fora da rede.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#1A1A1A]">Seguro de Vida & Odonto Integrado</h4>
+                <p class="text-xs text-slate-600">Seguro de vida corporativo e plano Odonto Mais inclusos no contrato sem custo extra.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: LOCAL NETWORK COMPARISON (NORTH ZONE) -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Plena Saúde -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50' width='200' height='50'><rect width='200' height='50' rx='10' fill='%230284C7'/><path d='M25 25 m-10 0 a 10 10 0 1 0 20 0 a 10 10 0 1 0 -20 0' fill='%23FFFFFF'/><path d='M22 25 H28 M25 22 V28' stroke='%230284C7' stroke-width='3' stroke-linecap='round'/><text x='44' y='28' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='15' fill='%23FFFFFF'>Plena Saúde</text><text x='44' y='40' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='9' fill='%23BAE6FD'>BLUE 600</text></svg>" alt="Plena Saúde" class="h-8 w-auto" />
+              <span class="text-xs font-bold text-sky-800 bg-sky-100 px-2.5 py-1 rounded-full">14 Hospitais</span>
+            </div>
+            <h3 class="font-bold text-sm mt-3">Plena Saúde (Blue 600 - Plano Atual)</h3>
+            <div class="mt-3 space-y-2 text-xs">
+              <div class="p-2 bg-slate-50 rounded-lg">
+                <strong>Hospital Previna (Taipas)</strong> — Av. Raimundo Pereira de Magalhães, 12367 (PS 24h Adulto/Pediátrico, Internação e Especialidades - Rede Própria).
+              </div>
+              <div class="p-2 bg-slate-50 rounded-lg">
+                <strong>Hospital Presidente (Tucuruvi)</strong> — Av. Nova Cantareira, 2398 (PS Geral e Internação).
+              </div>
+              <div class="p-2 bg-slate-50 rounded-lg">
+                <strong>Hospital HSANP (Santana)</strong> — R. Voluntários da Pátria, 4301 (PS, Internação e Maternidade).
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-3"><strong>Diagnósticos ZN:</strong> Lavoisier, Mello Centro de Diagnóstico, Labi Exames.</p>
+          </div>
+
+          <!-- Porto Saúde -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50' width='200' height='50'><rect width='200' height='50' rx='10' fill='%23004080'/><circle cx='25' cy='25' r='11' fill='%230099FF'/><path d='M20 25 L24 29 L31 20' stroke='%23FFFFFF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='44' y='28' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='15' fill='%23FFFFFF'>Porto Saúde</text><text x='44' y='40' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='9' fill='%2399CCFF'>LINHA PRO</text></svg>" alt="Porto Saúde" class="h-8 w-auto" />
+              <span class="text-xs font-bold text-blue-800 bg-blue-100 px-2.5 py-1 rounded-full">31 Hospitais</span>
+            </div>
+            <h3 class="font-bold text-sm mt-3">Porto Saúde (Linha Pro - Prata Pro - Opção 1)</h3>
+            <div class="mt-3 space-y-2 text-xs">
+              <div class="p-2 bg-slate-50 rounded-lg">
+                <strong>Hospital São Camilo (Santana)</strong> — Referência em Alta Complexidade, PS 24h Adulto/Pediátrico e Cardiologia.
+              </div>
+              <div class="p-2 bg-slate-50 rounded-lg">
+                <strong>Hospital Nipo-Brasileiro (Parque Novo Mundo)</strong> — Referência em Maternidade, Cirurgias e PS.
+              </div>
+              <div class="p-2 bg-slate-50 rounded-lg">
+                <strong>Hospital HSANP (Santana)</strong> — R. Voluntários da Pátria, 4301 (PS, Internação e Ortopedia).
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-3"><strong>Diagnósticos ZN:</strong> A+, Blume, CDB, Femme (Saúde da Mulher), Hermes Pardini, Lavoisier.</p>
+          </div>
+
+          <!-- SulAmérica Saúde -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50' width='200' height='50'><rect width='200' height='50' rx='10' fill='%23E65100'/><path d='M15 17 L33 17 L24 33 Z' fill='%23FFFFFF'/><text x='42' y='28' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='14' fill='%23FFFFFF'>SulAmérica</text><text x='42' y='40' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='9' fill='%23FFE0B2'>DIRETO NACIONAL</text></svg>" alt="SulAmérica Saúde" class="h-8 w-auto" />
+              <span class="text-xs font-bold text-orange-800 bg-orange-100 px-2.5 py-1 rounded-full">+50 Hospitais + Atendimento Nacional</span>
+            </div>
+            <h3 class="font-bold text-sm mt-3">SulAmérica Saúde (Direto Nacional - Exato - Opção 2)</h3>
+            <div class="mt-3 space-y-2 text-xs">
+              <div class="p-2 bg-slate-50 rounded-lg">
+                <strong>Hospital São Camilo (Santana)</strong> — Atendimento completo de urgência, alta complexidade e internação.
+              </div>
+              <div class="p-2 bg-slate-50 rounded-lg">
+                <strong>Hospital HSANP (Santana)</strong> — PS 24h, Internações e Maternidade.
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-3"><strong>Diagnósticos ZN:</strong> Delboni Auriemo, CDB, Crya, Femme, Lavoisier.</p>
+          </div>
+        </section>
+
+        <!-- SECTION 6: ADVISORY DECISION GUIDE FOR THE BOARD -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 space-y-4">
+          <h2 class="text-xl font-bold text-[#1A1A1A]">Guia Decisório para a Diretoria</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div class="p-5 rounded-xl border-2 border-orange-500 bg-orange-50/50">
+              <h3 class="font-bold text-orange-950 mb-2">Escolha a SulAmérica Saúde se:</h3>
+              <p class="text-slate-700 leading-relaxed">A cooperativa precisar de abrangência nacional para colaboradores e motoristas que viajam e necessitam de atendimento médico emergencial ou eletivo fora do Estado de SP.</p>
+            </div>
+            <div class="p-5 rounded-xl border-2 border-emerald-600 bg-emerald-50/50">
+              <h3 class="font-bold text-emerald-950 mb-2">Escolha a Porto Saúde se:</h3>
+              <p class="text-slate-700 leading-relaxed">A prioridade for terceirizar e incluir a Gestão de Saúde Ocupacional (SST e exames) diretamente no contrato do plano de saúde, com atuação focada no Estado de SP.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 7: NETWORK PDF DOWNLOAD CENTER -->
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold text-[#1A1A1A]">Central de Download de PDFs de Redes Credenciadas</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+              <div>
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50' width='200' height='50'><rect width='200' height='50' rx='10' fill='%230284C7'/><path d='M25 25 m-10 0 a 10 10 0 1 0 20 0 a 10 10 0 1 0 -20 0' fill='%23FFFFFF'/><path d='M22 25 H28 M25 22 V28' stroke='%230284C7' stroke-width='3' stroke-linecap='round'/><text x='44' y='28' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='15' fill='%23FFFFFF'>Plena Saúde</text><text x='44' y='40' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='9' fill='%23BAE6FD'>BLUE 600</text></svg>" alt="Plena Saúde" class="h-8 w-auto mb-3" />
+                <h3 class="font-bold text-sm">Rede Completa - Plena Saúde Blue 600</h3>
+              </div>
+              <button class="mt-4 py-2 px-4 bg-slate-900 text-white font-bold text-xs rounded-xl hover:bg-[#0E6135] transition-colors">Visualizar PDF</button>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+              <div>
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50' width='200' height='50'><rect width='200' height='50' rx='10' fill='%23004080'/><circle cx='25' cy='25' r='11' fill='%230099FF'/><path d='M20 25 L24 29 L31 20' stroke='%23FFFFFF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/><text x='44' y='28' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='15' fill='%23FFFFFF'>Porto Saúde</text><text x='44' y='40' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='9' fill='%2399CCFF'>LINHA PRO</text></svg>" alt="Porto Saúde" class="h-8 w-auto mb-3" />
+                <h3 class="font-bold text-sm">Rede Completa - Porto Seguro Linha Pro</h3>
+              </div>
+              <button class="mt-4 py-2 px-4 bg-slate-900 text-white font-bold text-xs rounded-xl hover:bg-[#0E6135] transition-colors">Visualizar PDF</button>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+              <div>
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50' width='200' height='50'><rect width='200' height='50' rx='10' fill='%23E65100'/><path d='M15 17 L33 17 L24 33 Z' fill='%23FFFFFF'/><text x='42' y='28' font-family='Plus Jakarta Sans, sans-serif' font-weight='800' font-size='14' fill='%23FFFFFF'>SulAmérica</text><text x='42' y='40' font-family='Plus Jakarta Sans, sans-serif' font-weight='600' font-size='9' fill='%23FFE0B2'>DIRETO NACIONAL</text></svg>" alt="SulAmérica Saúde" class="h-8 w-auto mb-3" />
+                <h3 class="font-bold text-sm">Rede Completa - SulAmérica Direto Nacional</h3>
+              </div>
+              <button class="mt-4 py-2 px-4 bg-slate-900 text-white font-bold text-xs rounded-xl hover:bg-[#0E6135] transition-colors">Visualizar PDF</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 8: INSTITUTIONAL FOOTER -->
+        <footer class="bg-white rounded-2xl border border-slate-200 p-8 text-center space-y-4">
+          <p class="text-sm font-medium text-slate-700">A Arkos Benefícios atua na gestão contínua e estratégica da saúde corporativa da COOPERCITYSP.</p>
+          <div>
+            <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20o%20consultor%20da%20Arkos%20Benef%C3%ADcios" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#10B981] text-white font-bold text-sm px-6 py-3.5 rounded-xl hover:bg-[#0E6135] transition-colors">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              Falar com o Consultor Arkos Benefícios via WhatsApp
+            </a>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- React App Entry point -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

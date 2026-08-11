@@ -1,0 +1,6 @@
+{
+  "name": "Arkos Benefícios - Estudo Comparativo COOPERCITYSP",
+  "description": "Painel executivo de estudo comparativo de planos de saúde: Porto Saúde vs. SulAmérica Saúde para a COOPERCITYSP",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
