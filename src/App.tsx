@@ -35,7 +35,16 @@ export default function App() {
     try {
       const saved = localStorage.getItem('arkos_custom_logos');
       if (saved) {
-        return { ...defaultLogos, ...JSON.parse(saved) };
+        const parsed = JSON.parse(saved);
+        const merged = { ...defaultLogos };
+        for (const k in parsed) {
+          const val = parsed[k as keyof CustomLogos];
+          // Only use custom value if it's a valid Data URL or external HTTP URL, not stale file path
+          if (val && typeof val === 'string' && (val.startsWith('data:') || val.startsWith('http:') || val.startsWith('https:'))) {
+            merged[k as keyof CustomLogos] = val;
+          }
+        }
+        return merged;
       }
     } catch (e) {
       console.error('Error loading custom logos:', e);
