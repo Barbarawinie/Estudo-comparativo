@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import {
   ARKOS_LOGO_SVG,
   PLENA_LOGO_SVG,
@@ -6,6 +6,7 @@ import {
   SULAMERICA_LOGO_SVG,
   HIGHLIGHT_CARDS,
   PRICING_TABLE,
+  TOTAL_PLENA,
   TOTAL_PORTO,
   TOTAL_SULAMERICA,
   ORIGINAL_SULAMERICA,
@@ -15,19 +16,77 @@ import {
   BOARD_DECISION_BOXES,
   PDF_DOCUMENTS
 } from './data';
-import { PdfDocument } from './types';
-
-const logos = {
-  arkos: ARKOS_LOGO_SVG,
-  sulamerica: SULAMERICA_LOGO_SVG,
-  porto: PORTO_LOGO_SVG,
-  plena: PLENA_LOGO_SVG
-};
+import { PdfDocument, CustomLogos } from './types';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'all' | 'finance' | 'differentials' | 'network'>('all');
   const [selectedPdf, setSelectedPdf] = useState<PdfDocument | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  
+  // Custom Logos State with localStorage persistence
+  const [logos, setLogos] = useState<CustomLogos>(() => {
+    const defaultLogos = {
+      arkos: ARKOS_LOGO_SVG,
+      sulamerica: SULAMERICA_LOGO_SVG,
+      porto: PORTO_LOGO_SVG,
+      plena: PLENA_LOGO_SVG,
+      coopercitysp: ''
+    };
+    try {
+      const saved = localStorage.getItem('arkos_custom_logos');
+      if (saved) {
+        return { ...defaultLogos, ...JSON.parse(saved) };
+      }
+    } catch (e) {
+      console.error('Error loading custom logos:', e);
+    }
+    return defaultLogos;
+  });
+  const [isLogoModalOpen, setIsLogoModalOpen] = useState(false);
+  const [tempLogos, setTempLogos] = useState<CustomLogos>(logos);
+
+  const handleLogoChange = (key: keyof CustomLogos, value: string) => {
+    setTempLogos(prev => ({ ...prev, [key]: value }));
+  };
+
+  const handleFileUpload = (key: keyof CustomLogos, e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setTempLogos(prev => ({ ...prev, [key]: reader.result as string }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const saveCustomLogos = () => {
+    setLogos(tempLogos);
+    try {
+      localStorage.setItem('arkos_custom_logos', JSON.stringify(tempLogos));
+    } catch (e) {
+      console.error('Error saving custom logos:', e);
+    }
+    setIsLogoModalOpen(false);
+  };
+
+  const resetLogos = () => {
+    const defaultLogos = {
+      arkos: ARKOS_LOGO_SVG,
+      sulamerica: SULAMERICA_LOGO_SVG,
+      porto: PORTO_LOGO_SVG,
+      plena: PLENA_LOGO_SVG,
+      coopercitysp: ''
+    };
+    setTempLogos(defaultLogos);
+    setLogos(defaultLogos);
+    try {
+      localStorage.removeItem('arkos_custom_logos');
+    } catch (e) {
+      console.error('Error resetting custom logos:', e);
+    }
+    setIsLogoModalOpen(false);
+  };
 
   const filteredPricing = PRICING_TABLE.filter(row =>
     row.ageGroup.toLowerCase().includes(searchTerm.toLowerCase())
@@ -39,25 +98,36 @@ export default function App() {
       <header className="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Header Left: Arkos Benefícios */}
+            {/* Header Left: Arkos Benefícios Logo */}
             <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
               <div className="flex items-center gap-4">
                 <img
                   src={logos.arkos}
                   alt="Arkos Benefícios"
-                  className="h-8 sm:h-9 md:h-10 w-auto object-contain"
+                  className="h-14 sm:h-16 md:h-20 w-auto object-contain max-h-20"
                 />
                 <div className="hidden sm:block">
                   <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-[#0E6135]/10 text-[#0E6135] border border-[#0E6135]/20">
-                    <i className="fa-solid fa-award mr-1.5 text-xs"></i>
+                    <i className="fa-solid fa-award mr-1.5 text-xs text-[#0E6135]"></i>
                     Consultoria Especializada em Benefícios
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Header Right: Presentation Badge */}
+            {/* Header Right: Presentation Badge & Customize Logos Button */}
             <div className="flex items-center gap-2.5 w-full md:w-auto justify-end">
+              <button
+                onClick={() => {
+                  setTempLogos(logos);
+                  setIsLogoModalOpen(true);
+                }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-[#0E6135] border border-emerald-200 hover:bg-emerald-100 transition-colors cursor-pointer shadow-2xs"
+              >
+                <i className="fa-solid fa-images text-[#0E6135]"></i>
+                Personalizar Logos
+              </button>
+
               <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-800 border border-slate-200">
                 <i className="fa-solid fa-building-user mr-1.5 text-xs text-[#0E6135]"></i>
                 Apresentação Comercial Executiva
@@ -73,9 +143,10 @@ export default function App() {
               </h1>
             </div>
 
+            {/* Coopercity text badge (No logo as requested) */}
             <div className="flex items-center gap-2 self-center md:self-auto bg-slate-100 p-1.5 rounded-xl border border-slate-200">
-              <span className="text-xs font-bold text-slate-600 px-2">Cliente:</span>
-              <span className="bg-white px-3 py-1 rounded-lg text-xs font-black text-[#0E6135] shadow-2xs border border-slate-200 uppercase tracking-wide">
+              <span className="text-xs font-bold text-slate-500 px-2">Cliente:</span>
+              <span className="bg-white px-3.5 py-1.5 rounded-lg text-xs font-black text-[#0E6135] shadow-2xs border border-slate-200 uppercase tracking-wider">
                 COOPERCITYSP
               </span>
             </div>
@@ -127,7 +198,7 @@ export default function App() {
                   : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
-              <i className="fa-solid fa-[#0E6135] fa-layer-group"></i>
+              <i className="fa-solid fa-layer-group"></i>
               Visão Geral Completa
             </button>
 
@@ -189,7 +260,7 @@ export default function App() {
                   Demonstrativo de Investimento Mensal e Tabela Per Capita
                 </h2>
                 <p className="text-sm text-slate-600">
-                  Comparativo direto de investimento por faixa etária entre Porto Saúde e SulAmérica Saúde
+                  Comparativo direto de investimento por faixa etária entre Plena Saúde, Porto Saúde e SulAmérica Saúde
                 </p>
               </div>
 
@@ -206,7 +277,35 @@ export default function App() {
             </div>
 
             {/* Summary Metric Cards Above Table */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* PLENA SAÚDE Metric Card */}
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={logos.plena}
+                      alt="Plena Saúde"
+                      className="h-8 sm:h-9 w-auto object-contain max-h-9"
+                    />
+                    <div>
+                      <h3 className="text-base font-bold text-[#991B1B]">PLENA SAÚDE</h3>
+                      <p className="text-xs text-slate-500 font-medium">Plano Atual Contratado</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-red-50/50 rounded-xl p-4 border border-red-100">
+                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+                    Total Faturado Mensal (45 Vidas)
+                  </span>
+                  <div className="text-2xl sm:text-3xl font-black text-[#1A1A1A] tracking-tight">{TOTAL_PLENA}</div>
+                  <p className="text-xs font-semibold text-slate-600 mt-2 flex items-center gap-1.5">
+                    <i className="fa-solid fa-users text-[#991B1B]"></i>
+                    Base atual: 45 Vidas
+                  </p>
+                </div>
+              </div>
+
               {/* PORTO SAÚDE Metric Card */}
               <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
                 <div className="flex items-center justify-between mb-4">
@@ -214,7 +313,7 @@ export default function App() {
                     <img
                       src={logos.porto}
                       alt="Porto Saúde"
-                      className="h-8 sm:h-9 w-auto object-contain"
+                      className="h-8 sm:h-9 w-auto object-contain max-h-9"
                     />
                     <div>
                       <h3 className="text-base font-bold text-[#004080]">PORTO SAÚDE</h3>
@@ -223,14 +322,14 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                <div className="bg-blue-50/50 rounded-xl p-4 border border-blue-100">
                   <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">
-                    Total Mensal (31 Vidas)
+                    Total Mensal Proposta (31 Vidas)
                   </span>
-                  <div className="text-3xl font-black text-[#1A1A1A] tracking-tight">{TOTAL_PORTO}</div>
+                  <div className="text-2xl sm:text-3xl font-black text-[#1A1A1A] tracking-tight">{TOTAL_PORTO}</div>
                   <p className="text-xs font-semibold text-slate-600 mt-2 flex items-center gap-1.5">
                     <i className="fa-solid fa-users text-[#004080]"></i>
-                    Média por vida: R$ 286,89 / mês
+                    Base proposta: 31 Vidas
                   </p>
                 </div>
               </div>
@@ -242,39 +341,38 @@ export default function App() {
                     <img
                       src={logos.sulamerica}
                       alt="SulAmérica Saúde"
-                      className="h-8 sm:h-9 w-auto object-contain"
+                      className="h-8 sm:h-9 w-auto object-contain max-h-9"
                     />
                     <div>
                       <h3 className="text-base font-bold text-[#E65100]">SULAMÉRICA SAÚDE</h3>
                       <p className="text-xs text-slate-500 font-medium">Direto Nacional - Enf 30% Copar</p>
                     </div>
                   </div>
-                  <span className="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-extrabold rounded-full border border-emerald-300 shadow-2xs">
-                    <i className="fa-solid fa-tag mr-1"></i> -16% Negociado
+                  <span className="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[11px] font-extrabold rounded-full border border-emerald-300 shadow-2xs">
+                    -16% Negociado
                   </span>
                 </div>
 
                 <div className="bg-orange-50/60 rounded-xl p-4 border border-orange-100">
                   <div className="flex items-baseline justify-between">
                     <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">
-                      Total Mensal (31 Vidas)
+                      Total Mensal Proposta (31 Vidas)
                     </span>
                     <span className="text-xs line-through text-slate-400 font-medium">
                       {ORIGINAL_SULAMERICA}
                     </span>
                   </div>
-                  <div className="text-3xl font-black text-[#1A1A1A] tracking-tight">{TOTAL_SULAMERICA}</div>
+                  <div className="text-2xl sm:text-3xl font-black text-[#1A1A1A] tracking-tight">{TOTAL_SULAMERICA}</div>
 
                   <p className="text-xs font-semibold text-slate-600 mt-2 flex items-center gap-1.5">
                     <i className="fa-solid fa-users text-[#E65100]"></i>
-                    Média por vida: R$ 289,80 / mês
+                    Base proposta: 31 Vidas
                   </p>
 
-                  <div className="mt-2 pt-2 border-t border-orange-200/60 flex flex-wrap items-center justify-between text-xs gap-2">
-                    <span className="font-bold text-[#E65100] bg-orange-100/80 px-2.5 py-0.5 rounded-md">
+                  <div className="mt-2 pt-2 border-t border-orange-200/60 flex flex-wrap items-center justify-between text-xs gap-1.5">
+                    <span className="font-bold text-[#E65100] bg-orange-100/80 px-2 py-0.5 rounded-md text-[11px]">
                       Economia de {ECONOMY_SULAMERICA}
                     </span>
-                    <span className="font-medium text-slate-600">Com Desconto de -16% Negociado</span>
                   </div>
                 </div>
               </div>
@@ -284,7 +382,7 @@ export default function App() {
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
               <div className="p-4 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <i className="fa-solid fa-[#0E6135] fa-table text-[#0E6135]"></i>
+                  <i className="fa-solid fa-table text-[#0E6135]"></i>
                   <h3 className="text-sm font-bold text-[#1A1A1A]">
                     Tabela Detalhada de Preços Per Capita por Faixa Etária
                   </h3>
@@ -299,6 +397,9 @@ export default function App() {
                   <thead>
                     <tr className="bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider border-b border-slate-200">
                       <th className="py-3.5 px-6">Faixa Etária</th>
+                      <th className="py-3.5 px-6 text-right bg-red-50/50 text-[#991B1B]">
+                        Plena Saúde (Atual)
+                      </th>
                       <th className="py-3.5 px-6 text-right bg-blue-50/50 text-[#004080]">
                         Porto Saúde - Prata Pro
                       </th>
@@ -316,6 +417,9 @@ export default function App() {
                         <td className="py-3.5 px-6 font-bold text-slate-800">
                           {row.ageGroup}
                         </td>
+                        <td className="py-3.5 px-6 text-right font-semibold text-[#991B1B] bg-red-50/20">
+                          {row.plenaPrice}
+                        </td>
                         <td className="py-3.5 px-6 text-right font-semibold text-[#004080] bg-blue-50/20">
                           {row.portoPrice}
                         </td>
@@ -328,13 +432,16 @@ export default function App() {
                   <tfoot>
                     <tr className="bg-slate-900 text-white text-sm font-bold border-t-2 border-slate-900">
                       <td className="py-4 px-6 font-extrabold tracking-wide">
-                        TOTAL MENSAL DA PROPOSTA (31 VIDAS)
+                        TOTAL MENSAL DA PROPOSTA
+                      </td>
+                      <td className="py-4 px-6 text-right font-black text-red-300 text-base">
+                        {TOTAL_PLENA} <span className="text-xs font-normal text-slate-300 block">(45 Vidas)</span>
                       </td>
                       <td className="py-4 px-6 text-right font-black text-blue-300 text-base">
-                        {TOTAL_PORTO}
+                        {TOTAL_PORTO} <span className="text-xs font-normal text-slate-300 block">(31 Vidas)</span>
                       </td>
                       <td className="py-4 px-6 text-right font-black text-orange-300 text-base">
-                        {TOTAL_SULAMERICA}
+                        {TOTAL_SULAMERICA} <span className="text-xs font-normal text-slate-300 block">(31 Vidas)</span>
                       </td>
                     </tr>
                   </tfoot>
@@ -637,14 +744,13 @@ export default function App() {
             <img
               src={logos.arkos}
               alt="Arkos Benefícios"
-              className="h-10 sm:h-12 w-auto object-contain"
+              className="h-12 sm:h-14 w-auto object-contain max-h-16"
             />
-            <span className="text-slate-300 font-light text-2xl">|</span>
-            <img
-              src={logos.coopercitysp}
-              alt="COOPERCITYSP"
-              className="h-10 sm:h-12 w-auto object-contain"
-            />
+            <span className="text-slate-300 font-light text-xl">|</span>
+            <div className="flex flex-col items-start text-left">
+              <span className="font-black text-slate-800 text-sm tracking-wider">COOPERCITYSP</span>
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Cooperativa Municipal de São Paulo</span>
+            </div>
           </div>
 
           <p className="text-sm font-medium text-slate-700 max-w-2xl mx-auto leading-relaxed">
@@ -656,6 +762,165 @@ export default function App() {
           </div>
         </footer>
       </main>
+
+      {/* MODAL DE PERSONALIZAÇÃO DE LOGOS */}
+      {isLogoModalOpen && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-xl w-full p-6 space-y-6 shadow-2xl border border-slate-200 animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-[#0E6135] flex items-center justify-center text-lg font-bold">
+                  <i className="fa-solid fa-images"></i>
+                </div>
+                <div>
+                  <h3 className="font-bold text-base text-[#1A1A1A]">
+                    Personalizar Logotipos das Marcas
+                  </h3>
+                  <p className="text-xs text-slate-500">Envie uma imagem ou insira a URL da imagem para alterar qualquer logo da página</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsLogoModalOpen(false)}
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition-colors cursor-pointer"
+              >
+                <i className="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div className="space-y-5">
+              {/* Logo Arkos */}
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-slate-800 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#0E6135]"></span>
+                    Logo Arkos Benefícios
+                  </label>
+                  <img src={tempLogos.arkos} alt="Preview Arkos" className="h-6 w-auto max-w-[100px] object-contain border border-slate-200 bg-white p-1 rounded" />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    placeholder="URL do logotipo Arkos..."
+                    value={tempLogos.arkos}
+                    onChange={e => handleLogoChange('arkos', e.target.value)}
+                    className="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#0E6135]"
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={e => handleFileUpload('arkos', e)}
+                    className="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-[#0E6135] hover:file:bg-emerald-100 cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              {/* Logo Porto Saúde */}
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-slate-800 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                    Logo Porto Saúde
+                  </label>
+                  <img src={tempLogos.porto} alt="Preview Porto" className="h-6 w-auto max-w-[100px] object-contain border border-slate-200 bg-white p-1 rounded" />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    placeholder="URL do logotipo Porto..."
+                    value={tempLogos.porto}
+                    onChange={e => handleLogoChange('porto', e.target.value)}
+                    className="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#0E6135]"
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={e => handleFileUpload('porto', e)}
+                    className="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              {/* Logo SulAmérica Saúde */}
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-slate-800 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-orange-600"></span>
+                    Logo SulAmérica Saúde
+                  </label>
+                  <img src={tempLogos.sulamerica} alt="Preview SulAmerica" className="h-6 w-auto max-w-[100px] object-contain border border-slate-200 bg-white p-1 rounded" />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    placeholder="URL do logotipo SulAmérica..."
+                    value={tempLogos.sulamerica}
+                    onChange={e => handleLogoChange('sulamerica', e.target.value)}
+                    className="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#0E6135]"
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={e => handleFileUpload('sulamerica', e)}
+                    className="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              {/* Logo Plena Saúde */}
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-slate-800 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-red-600"></span>
+                    Logo Plena Saúde
+                  </label>
+                  <img src={tempLogos.plena} alt="Preview Plena" className="h-6 w-auto max-w-[100px] object-contain border border-slate-200 bg-white p-1 rounded" />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    placeholder="URL do logotipo Plena..."
+                    value={tempLogos.plena}
+                    onChange={e => handleLogoChange('plena', e.target.value)}
+                    className="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#0E6135]"
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={e => handleFileUpload('plena', e)}
+                    className="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-3 border-t border-slate-100">
+              <button
+                type="button"
+                onClick={resetLogos}
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer"
+              >
+                Restaurar Padrões
+              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsLogoModalOpen(false)}
+                  className="px-4 py-2 text-slate-600 hover:text-slate-900 font-bold text-xs rounded-xl cursor-pointer"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  onClick={saveCustomLogos}
+                  className="px-5 py-2 bg-[#0E6135] hover:bg-[#073B20] text-white font-bold text-xs rounded-xl transition-colors cursor-pointer shadow-2xs"
+                >
+                  Salvar Logotipos
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* PDF PREVIEW MODAL */}
       {selectedPdf && (

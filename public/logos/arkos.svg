@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" fill="none">
+  <defs>
+    <!-- Primary Gradient for Symbol -->
+    <linearGradient id="arkosGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E6135" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+    <linearGradient id="arkosGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#073B20" />
+      <stop offset="100%" stop-color="#0E6135" />
+    </linearGradient>
+    <linearGradient id="arkosGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+
+  <!-- LOGO MARK: Modern Geometric Arch / Shield -->
+  <g transform="translate(10, 12)">
+    <!-- Base Arch -->
+    <path d="M 15 72 C 15 32, 38 12, 68 12 C 68 28, 48 42, 34 72 Z" fill="url(#arkosGrad2)" />
+    <!-- Middle Arc -->
+    <path d="M 32 72 C 36 44, 56 22, 82 22 C 74 40, 54 54, 48 72 Z" fill="url(#arkosGrad1)" />
+    <!-- Light Highlight Swoosh -->
+    <path d="M 52 72 C 56 52, 70 34, 94 30 C 86 46, 68 58, 62 72 Z" fill="url(#arkosGrad3)" />
+  </g>
+
+  <!-- TYPOGRAPHY: ARKOS -->
+  <text x="122" y="52" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="42" fill="#0E6135" letter-spacing="3">
+    ARKOS
+  </text>
+
+  <!-- SUBTITLE: BENEFÍCIOS -->
+  <text x="124" y="74" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="15" fill="#10B981" letter-spacing="5.5">
+    BENEFÍCIOS
+  </text>
+</svg>

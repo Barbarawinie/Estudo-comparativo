@@ -1,7 +1,9 @@
 export interface PricingRow {
   ageGroup: string;
+  plenaPrice: string;
   portoPrice: string;
   sulamericaPrice: string;
+  plenaValue: number;
   portoValue: number;
   sulamericaValue: number;
 }

@@ -6,8 +6,8 @@ import {
   PdfDocument
 } from './types';
 
-export const ARKOS_LOGO_SVG = '/logos/arkos.png';
-export const PLENA_LOGO_SVG = '/logos/plena.png';
+export const ARKOS_LOGO_SVG = '/logos/arkos.svg';
+export const PLENA_LOGO_SVG = '/logos/plena.svg';
 export const PORTO_LOGO_SVG = '/logos/porto.svg';
 export const SULAMERICA_LOGO_SVG = '/logos/sulamerica.svg';
 
@@ -33,18 +33,19 @@ export const HIGHLIGHT_CARDS: HighlightCard[] = [
 ];
 
 export const PRICING_TABLE: PricingRow[] = [
-  { ageGroup: '0 a 18 anos', portoPrice: 'R$ 187,25', sulamericaPrice: 'R$ 166,16', portoValue: 187.25, sulamericaValue: 166.16 },
-  { ageGroup: '19 a 23 anos', portoPrice: 'R$ 227,08', sulamericaPrice: 'R$ 207,70', portoValue: 227.08, sulamericaValue: 207.70 },
-  { ageGroup: '24 a 28 anos', portoPrice: 'R$ 273,93', sulamericaPrice: 'R$ 257,54', portoValue: 273.93, sulamericaValue: 257.54 },
-  { ageGroup: '29 a 33 anos', portoPrice: 'R$ 313,60', sulamericaPrice: 'R$ 285,87', portoValue: 313.60, sulamericaValue: 285.87 },
-  { ageGroup: '34 a 38 anos', portoPrice: 'R$ 339,79', sulamericaPrice: 'R$ 305,89', portoValue: 339.79, sulamericaValue: 305.89 },
-  { ageGroup: '39 a 43 anos', portoPrice: 'R$ 350,92', sulamericaPrice: 'R$ 354,82', portoValue: 350.92, sulamericaValue: 354.82 },
-  { ageGroup: '44 a 48 anos', portoPrice: 'R$ 419,18', sulamericaPrice: 'R$ 424,16', portoValue: 419.18, sulamericaValue: 424.16 },
-  { ageGroup: '49 a 53 anos', portoPrice: 'R$ 451,26', sulamericaPrice: 'R$ 497,11', portoValue: 451.26, sulamericaValue: 497.11 },
-  { ageGroup: '54 a 58 anos', portoPrice: 'R$ 557,57', sulamericaPrice: 'R$ 591,81', portoValue: 557.57, sulamericaValue: 591.81 },
-  { ageGroup: '59+ anos', portoPrice: 'R$ 937,23', sulamericaPrice: 'R$ 996,91', portoValue: 937.23, sulamericaValue: 996.91 }
+  { ageGroup: '0 a 18 anos', plenaPrice: 'R$ 139,99', portoPrice: 'R$ 187,25', sulamericaPrice: 'R$ 166,16', plenaValue: 139.99, portoValue: 187.25, sulamericaValue: 166.16 },
+  { ageGroup: '19 a 23 anos', plenaPrice: 'R$ 163,99', portoPrice: 'R$ 227,08', sulamericaPrice: 'R$ 207,70', plenaValue: 163.99, portoValue: 227.08, sulamericaValue: 207.70 },
+  { ageGroup: '24 a 28 anos', plenaPrice: 'R$ 163,99', portoPrice: 'R$ 273,93', sulamericaPrice: 'R$ 257,54', plenaValue: 163.99, portoValue: 273.93, sulamericaValue: 257.54 },
+  { ageGroup: '29 a 33 anos', plenaPrice: 'R$ 163,99', portoPrice: 'R$ 313,60', sulamericaPrice: 'R$ 285,87', plenaValue: 163.99, portoValue: 313.60, sulamericaValue: 285.87 },
+  { ageGroup: '34 a 38 anos', plenaPrice: 'R$ 163,99', portoPrice: 'R$ 339,79', sulamericaPrice: 'R$ 305,89', plenaValue: 163.99, portoValue: 339.79, sulamericaValue: 305.89 },
+  { ageGroup: '39 a 43 anos', plenaPrice: 'R$ 183,99', portoPrice: 'R$ 350,92', sulamericaPrice: 'R$ 354,82', plenaValue: 183.99, portoValue: 350.92, sulamericaValue: 354.82 },
+  { ageGroup: '44 a 48 anos', plenaPrice: 'R$ 183,99', portoPrice: 'R$ 419,18', sulamericaPrice: 'R$ 424,16', plenaValue: 183.99, portoValue: 419.18, sulamericaValue: 424.16 },
+  { ageGroup: '49 a 53 anos', plenaPrice: 'R$ 183,99', portoPrice: 'R$ 451,26', sulamericaPrice: 'R$ 497,11', plenaValue: 183.99, portoValue: 451.26, sulamericaValue: 497.11 },
+  { ageGroup: '54 a 58 anos', plenaPrice: 'R$ 183,99', portoPrice: 'R$ 557,57', sulamericaPrice: 'R$ 591,81', plenaValue: 183.99, portoValue: 557.57, sulamericaValue: 591.81 },
+  { ageGroup: '59+ anos', plenaPrice: 'R$ 463,99', portoPrice: 'R$ 937,23', sulamericaPrice: 'R$ 996,91', plenaValue: 463.99, portoValue: 937.23, sulamericaValue: 996.91 }
 ];
 
+export const TOTAL_PLENA = 'R$ 9.343,55';
 export const TOTAL_PORTO = 'R$ 10.902,03';
 export const TOTAL_SULAMERICA = 'R$ 11.012,28';
 export const ORIGINAL_SULAMERICA = 'R$ 13.109,86';
